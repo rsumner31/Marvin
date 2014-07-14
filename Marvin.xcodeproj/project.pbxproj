@@ -121,6 +121,7 @@
 				BDF772CA1973C2F600C20E5A /* Sources */,
 				BDF772CB1973C2F600C20E5A /* Frameworks */,
 				BDF772CC1973C2F600C20E5A /* Resources */,
+				BDF772E71973C6E700C20E5A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -166,6 +167,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BDF772E71973C6E700C20E5A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ $INSTALL_PLUGIN == 1 ]; then\nDEST=\"$USER_LIBRARY_DIR/Application Support/Coda 2/Plug-ins/$FULL_PRODUCT_NAME\"\nORG=\"$TARGET_BUILD_DIR/$FULL_PRODUCT_NAME\"\nrm -rf \"$DEST\"\nmv \"$ORG\" \"$DEST\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		BDF772CA1973C2F600C20E5A /* Sources */ = {
@@ -239,6 +256,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Marvin/Marvin-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PLUGIN = 1;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -279,6 +297,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				INFOPLIST_FILE = "Marvin/Marvin-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Bundles";
+				INSTALL_PLUGIN = "";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
