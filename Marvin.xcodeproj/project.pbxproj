@@ -20,6 +20,7 @@
 		BDF772D91973C2F600C20E5A /* Marvin-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Marvin-Info.plist"; sourceTree = "<group>"; };
 		BDF772DB1973C2F600C20E5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BDF772DD1973C2F600C20E5A /* Marvin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Marvin-Prefix.pch"; sourceTree = "<group>"; };
+		BDF772E31973C36C00C20E5A /* CodaPlugInsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodaPlugInsController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,9 +38,11 @@
 		BDF772C31973C1EE00C20E5A = {
 			isa = PBXGroup;
 			children = (
-				BDF772D71973C2F600C20E5A /* Marvin */,
 				BDF772D01973C2F600C20E5A /* Frameworks */,
+				BDF772D71973C2F600C20E5A /* Marvin */,
 				BDF772CF1973C2F600C20E5A /* Products */,
+				BDF772E11973C36C00C20E5A /* Source */,
+				BDF772E21973C36C00C20E5A /* Vendor */,
 			);
 			sourceTree = "<group>";
 		};
@@ -86,6 +89,21 @@
 				BDF772DD1973C2F600C20E5A /* Marvin-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BDF772E11973C36C00C20E5A /* Source */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		BDF772E21973C36C00C20E5A /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				BDF772E31973C36C00C20E5A /* CodaPlugInsController.h */,
+			);
+			path = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
