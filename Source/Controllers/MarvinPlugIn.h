@@ -6,11 +6,12 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
+#import "MarvinPlugIn.h"
 #import "CodaPlugInsController.h"
 
 @class CodaPlugInsController;
 
-@interface MarvinPlugInController : NSObject <CodaPlugIn>
+@interface MarvinPlugIn : NSObject <CodaPlugIn>
 
 @end

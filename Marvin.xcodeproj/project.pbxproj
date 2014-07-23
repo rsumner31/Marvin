@@ -7,12 +7,35 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD2CA75F19766B9900C04143 /* MARManipulationMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2CA75E19766B9900C04143 /* MARManipulationMenu.m */; };
+		BD4BA06219762D7200AF69B0 /* MARWindowMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA06119762D7200AF69B0 /* MARWindowMenu.m */; };
+		BDEBC77519744AD400DE2783 /* MARMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC77419744AD400DE2783 /* MARMenuItem.m */; };
+		BDEBC77E19750E9800DE2783 /* CodaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC77D19750E9800DE2783 /* CodaManager.m */; };
+		BDEBC78119750EA500DE2783 /* MarvinManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC78019750EA500DE2783 /* MarvinManager.m */; };
+		BDEBC785197510FA00DE2783 /* MARSelectionMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC784197510FA00DE2783 /* MARSelectionMenu.m */; };
+		BDEBC78C1975346C00DE2783 /* NSString+Reverse.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC78B1975346C00DE2783 /* NSString+Reverse.m */; };
 		BDF772D21973C2F600C20E5A /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BDF772D11973C2F600C20E5A /* Cocoa.framework */; };
 		BDF772DC1973C2F600C20E5A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BDF772DA1973C2F600C20E5A /* InfoPlist.strings */; };
-		BDF772ED1973CBC900C20E5A /* MarvinPlugInController.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF772EB1973CBC900C20E5A /* MarvinPlugInController.m */; };
+		BDF772ED1973CBC900C20E5A /* MarvinPlugIn.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF772EB1973CBC900C20E5A /* MarvinPlugIn.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD2CA75D19766B9900C04143 /* MARManipulationMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARManipulationMenu.h; sourceTree = "<group>"; };
+		BD2CA75E19766B9900C04143 /* MARManipulationMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARManipulationMenu.m; sourceTree = "<group>"; };
+		BD4BA06019762D7200AF69B0 /* MARWindowMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARWindowMenu.h; sourceTree = "<group>"; };
+		BD4BA06119762D7200AF69B0 /* MARWindowMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARWindowMenu.m; sourceTree = "<group>"; };
+		BD7EBDC8197C3F6E001613E2 /* Coda2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coda2.h; sourceTree = "<group>"; };
+		BD7EBDC9197C3F76001613E2 /* SystemEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SystemEvents.h; sourceTree = "<group>"; };
+		BDEBC77319744AD400DE2783 /* MARMenuItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARMenuItem.h; sourceTree = "<group>"; };
+		BDEBC77419744AD400DE2783 /* MARMenuItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARMenuItem.m; sourceTree = "<group>"; };
+		BDEBC77C19750E9800DE2783 /* CodaManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodaManager.h; sourceTree = "<group>"; };
+		BDEBC77D19750E9800DE2783 /* CodaManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodaManager.m; sourceTree = "<group>"; };
+		BDEBC77F19750EA500DE2783 /* MarvinManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvinManager.h; sourceTree = "<group>"; };
+		BDEBC78019750EA500DE2783 /* MarvinManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvinManager.m; sourceTree = "<group>"; };
+		BDEBC783197510FA00DE2783 /* MARSelectionMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARSelectionMenu.h; sourceTree = "<group>"; };
+		BDEBC784197510FA00DE2783 /* MARSelectionMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARSelectionMenu.m; sourceTree = "<group>"; };
+		BDEBC78A1975346C00DE2783 /* NSString+Reverse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Reverse.h"; sourceTree = "<group>"; };
+		BDEBC78B1975346C00DE2783 /* NSString+Reverse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Reverse.m"; sourceTree = "<group>"; };
 		BDF772CE1973C2F600C20E5A /* Marvin.codaplugin */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Marvin.codaplugin; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDF772D11973C2F600C20E5A /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		BDF772D41973C2F600C20E5A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -22,8 +45,8 @@
 		BDF772DB1973C2F600C20E5A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		BDF772DD1973C2F600C20E5A /* Marvin-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Marvin-Prefix.pch"; sourceTree = "<group>"; };
 		BDF772E31973C36C00C20E5A /* CodaPlugInsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CodaPlugInsController.h; sourceTree = "<group>"; };
-		BDF772EA1973CBC900C20E5A /* MarvinPlugInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvinPlugInController.h; sourceTree = "<group>"; };
-		BDF772EB1973CBC900C20E5A /* MarvinPlugInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvinPlugInController.m; sourceTree = "<group>"; };
+		BDF772EA1973CBC900C20E5A /* MarvinPlugIn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MarvinPlugIn.h; sourceTree = "<group>"; };
+		BDF772EB1973CBC900C20E5A /* MarvinPlugIn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MarvinPlugIn.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,9 +61,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BDEBC76E197449C900DE2783 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BDEBC7861975319A00DE2783 /* Categories */,
+				BDEBC76F197449C900DE2783 /* Models */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		BDEBC76F197449C900DE2783 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BDEBC77319744AD400DE2783 /* MARMenuItem.h */,
+				BDEBC77419744AD400DE2783 /* MARMenuItem.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BDEBC7861975319A00DE2783 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				BDEBC78A1975346C00DE2783 /* NSString+Reverse.h */,
+				BDEBC78B1975346C00DE2783 /* NSString+Reverse.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
 		BDF772C31973C1EE00C20E5A = {
 			isa = PBXGroup;
 			children = (
+				BDEBC76E197449C900DE2783 /* Library */,
 				BDF772D01973C2F600C20E5A /* Frameworks */,
 				BDF772D71973C2F600C20E5A /* Marvin */,
 				BDF772CF1973C2F600C20E5A /* Products */,
@@ -97,6 +148,8 @@
 		BDF772E21973C36C00C20E5A /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
+				BD7EBDC9197C3F76001613E2 /* SystemEvents.h */,
+				BD7EBDC8197C3F6E001613E2 /* Coda2.h */,
 				BDF772E31973C36C00C20E5A /* CodaPlugInsController.h */,
 			);
 			path = Vendor;
@@ -114,8 +167,12 @@
 		BDF772E91973CBC900C20E5A /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				BDF772EA1973CBC900C20E5A /* MarvinPlugInController.h */,
-				BDF772EB1973CBC900C20E5A /* MarvinPlugInController.m */,
+				BDEBC77C19750E9800DE2783 /* CodaManager.h */,
+				BDEBC77D19750E9800DE2783 /* CodaManager.m */,
+				BDEBC77F19750EA500DE2783 /* MarvinManager.h */,
+				BDEBC78019750EA500DE2783 /* MarvinManager.m */,
+				BDF772EA1973CBC900C20E5A /* MarvinPlugIn.h */,
+				BDF772EB1973CBC900C20E5A /* MarvinPlugIn.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +180,12 @@
 		BDF772EC1973CBC900C20E5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BDEBC783197510FA00DE2783 /* MARSelectionMenu.h */,
+				BD2CA75D19766B9900C04143 /* MARManipulationMenu.h */,
+				BD2CA75E19766B9900C04143 /* MARManipulationMenu.m */,
+				BDEBC784197510FA00DE2783 /* MARSelectionMenu.m */,
+				BD4BA06019762D7200AF69B0 /* MARWindowMenu.h */,
+				BD4BA06119762D7200AF69B0 /* MARWindowMenu.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -205,7 +268,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BDF772ED1973CBC900C20E5A /* MarvinPlugInController.m in Sources */,
+				BDEBC785197510FA00DE2783 /* MARSelectionMenu.m in Sources */,
+				BDEBC77E19750E9800DE2783 /* CodaManager.m in Sources */,
+				BDEBC77519744AD400DE2783 /* MARMenuItem.m in Sources */,
+				BD4BA06219762D7200AF69B0 /* MARWindowMenu.m in Sources */,
+				BDEBC78119750EA500DE2783 /* MarvinManager.m in Sources */,
+				BDEBC78C1975346C00DE2783 /* NSString+Reverse.m in Sources */,
+				BD2CA75F19766B9900C04143 /* MARManipulationMenu.m in Sources */,
+				BDF772ED1973CBC900C20E5A /* MarvinPlugIn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +410,7 @@
 				BDF772DF1973C2F600C20E5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
