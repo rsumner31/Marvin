@@ -36,19 +36,23 @@
     self = [super init];
     if (!self) return nil;
 
-    //self.marvinManager.pluginController = inController;
     self.marvinManager =  [self.marvinManager initWithPlugInsController:inController];
-    
+
     return self;
 }
 
 - (MarvinManager *)marvinManager
 {
     if (_marvinManager) return _marvinManager;
-    
+
     _marvinManager = [MarvinManager new];
-    
+
     return _marvinManager;
+}
+
+- (void)textViewWillSave:(CodaTextView*)textView
+{
+    [self.marvinManager codaWillSave];
 }
 
 @end

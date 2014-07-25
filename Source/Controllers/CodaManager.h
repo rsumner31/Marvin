@@ -13,6 +13,8 @@
 
 @property (nonatomic, strong) CodaPlugInsController *pluginController;
 
+- (NSString *)contents;
+- (NSUInteger)documentLength;
 - (NSUInteger)currentLineNumber;
 - (NSRange)selectedRange;
 - (NSRange)currentWordRange;
@@ -29,5 +31,14 @@
 - (NSRange)joinRange;;
 - (void)uppercase;
 - (void)lowercase;
+
+- (NSString*)currentLine;
+- (void)insertText:(NSString *)string;
+- (void)save;
+- (NSString *)selectedText;
+- (void)getLine:(NSInteger*)line column:(NSInteger*)column;
+- (void)goToLine:(NSInteger)line column:(NSInteger)column;
+- (NSString *)filename;
+- (NSString *)path;
 
 @end

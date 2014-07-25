@@ -28,5 +28,12 @@
 - (void)moveToNewWindow;
 - (void)splitViewHorizontally;
 - (void)splitViewVertically;
+- (void)codaWillSave;
+- (void)moveToEOLAndInsertLF;
+- (void)moveToEOLAndInsertTerminator;
+- (void)moveToEOLAndInsertTerminatorPlusLF;
+- (void)selectAllWithinBracketsBackward;
+- (void)selectAllWithinBracketsForward;
+- (void)highlightSelection;
 
 @end
