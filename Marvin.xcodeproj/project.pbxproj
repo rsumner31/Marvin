@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		BD23961719801DC700FBB9CF /* MAREOLMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD23961619801DC700FBB9CF /* MAREOLMenu.m */; };
-		BD2CA75F19766B9900C04143 /* MARManipulationMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2CA75E19766B9900C04143 /* MARManipulationMenu.m */; };
+		BD2CA75F19766B9900C04143 /* MARTextMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD2CA75E19766B9900C04143 /* MARTextMenu.m */; };
 		BD4BA06219762D7200AF69B0 /* MARWindowMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = BD4BA06119762D7200AF69B0 /* MARWindowMenu.m */; };
 		BDEBC77519744AD400DE2783 /* MARMenuItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC77419744AD400DE2783 /* MARMenuItem.m */; };
 		BDEBC77E19750E9800DE2783 /* CodaManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BDEBC77D19750E9800DE2783 /* CodaManager.m */; };
@@ -23,8 +23,8 @@
 /* Begin PBXFileReference section */
 		BD23961519801DC700FBB9CF /* MAREOLMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAREOLMenu.h; sourceTree = "<group>"; };
 		BD23961619801DC700FBB9CF /* MAREOLMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAREOLMenu.m; sourceTree = "<group>"; };
-		BD2CA75D19766B9900C04143 /* MARManipulationMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARManipulationMenu.h; sourceTree = "<group>"; };
-		BD2CA75E19766B9900C04143 /* MARManipulationMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARManipulationMenu.m; sourceTree = "<group>"; };
+		BD2CA75D19766B9900C04143 /* MARTextMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARTextMenu.h; sourceTree = "<group>"; };
+		BD2CA75E19766B9900C04143 /* MARTextMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARTextMenu.m; sourceTree = "<group>"; };
 		BD4BA06019762D7200AF69B0 /* MARWindowMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MARWindowMenu.h; sourceTree = "<group>"; };
 		BD4BA06119762D7200AF69B0 /* MARWindowMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MARWindowMenu.m; sourceTree = "<group>"; };
 		BD7EBDC8197C3F6E001613E2 /* Coda2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coda2.h; sourceTree = "<group>"; };
@@ -183,8 +183,8 @@
 		BDF772EC1973CBC900C20E5A /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BD2CA75D19766B9900C04143 /* MARManipulationMenu.h */,
-				BD2CA75E19766B9900C04143 /* MARManipulationMenu.m */,
+				BD2CA75D19766B9900C04143 /* MARTextMenu.h */,
+				BD2CA75E19766B9900C04143 /* MARTextMenu.m */,
 				BDEBC783197510FA00DE2783 /* MARSelectionMenu.h */,
 				BDEBC784197510FA00DE2783 /* MARSelectionMenu.m */,
 				BD4BA06019762D7200AF69B0 /* MARWindowMenu.h */,
@@ -280,7 +280,7 @@
 				BD4BA06219762D7200AF69B0 /* MARWindowMenu.m in Sources */,
 				BDEBC78119750EA500DE2783 /* MarvinManager.m in Sources */,
 				BDEBC78C1975346C00DE2783 /* NSString+Reverse.m in Sources */,
-				BD2CA75F19766B9900C04143 /* MARManipulationMenu.m in Sources */,
+				BD2CA75F19766B9900C04143 /* MARTextMenu.m in Sources */,
 				BDF772ED1973CBC900C20E5A /* MarvinPlugIn.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

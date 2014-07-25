@@ -8,6 +8,6 @@
 
 #import "MARMenuItem.h"
 
-@interface MARManipulationMenu : MARMenuItem
+@interface MARTextMenu : MARMenuItem
 
 @end

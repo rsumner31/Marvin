@@ -14,7 +14,7 @@
 #import "MarvinManager.h"
 #import "MARSelectionMenu.h"
 #import "MARWindowMenu.h"
-#import "MARManipulationMenu.h"
+#import "MARTextMenu.h"
 #import "MAREOLMenu.h"
 
 @interface MarvinManager ()
@@ -32,7 +32,7 @@
 
     self.pluginController = inController;
 
-    [self registerMenuItems:[MARManipulationMenu new]];
+    [self registerMenuItems:[MARTextMenu new]];
     [self registerMenuItems:[MARSelectionMenu new]];
     [self registerMenuItems:[MARWindowMenu new]];
     [self registerMenuItems:[MAREOLMenu new]];
@@ -183,7 +183,6 @@
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Hide Sidebar"] clickAt:nil];
 
         NSArray *menuItems = [[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems];
-        // 11 = Close tab
         if (menuItems) {
             [[menuItems objectAtIndex:11] clickAt:nil];
 
@@ -202,13 +201,13 @@
 {
     NSString *path = [self.codaManager path];
     dispatch_async(self.bridgeQueue,^{
-        [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems] objectWithName:@"New Window"] clickAt:nil];
-        [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Editor"] clickAt:nil];
-        [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Hide Sidebar"] clickAt:nil];
-
         NSArray *menuItems = [[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems];
-        // 11 = Close tab
+
         if (menuItems) {
+            [[menuItems objectAtIndex:11] clickAt:nil];
+            [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems] objectWithName:@"New Window"] clickAt:nil];
+            [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Editor"] clickAt:nil];
+            [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Hide Sidebar"] clickAt:nil];
             [[menuItems objectAtIndex:11] clickAt:nil];
 
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.0005f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
