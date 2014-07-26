@@ -317,8 +317,18 @@
 
     NSString *spacing = [[self.codaManager contents] substringWithRange:NSMakeRange(lineRange.location, endOfLineRange.location - lineRange.location)];
 
-    [self.codaManager replaceCharactersInRange:NSMakeRange(endOfLine,0) withString:[NSString stringWithFormat:@"\n%@", spacing]];
-    [self.codaManager setSelectedRange:NSMakeRange(endOfLine+1+spacing.length, 0)];
+    unichar lastCharacterInLine = [[self.codaManager contents] characterAtIndex:endOfLineRange.location+endOfLineRange.length-1];
+    int ascii = lastCharacterInLine;
+
+    NSMutableString *additionalSpacing = [NSMutableString string];
+    if (ascii == 123) {
+        for (int x = 0; x < [self.codaManager tabWidth]; x++) {
+            [additionalSpacing appendString:@" "];
+        }
+    }
+
+    [self.codaManager replaceCharactersInRange:NSMakeRange(endOfLine,0) withString:[NSString stringWithFormat:@"\n%@%@", spacing, [additionalSpacing copy]]];
+    [self.codaManager setSelectedRange:NSMakeRange(endOfLine+1+spacing.length+additionalSpacing.length, 0)];
 }
 
 - (void)moveToEOLAndInsertTerminator {

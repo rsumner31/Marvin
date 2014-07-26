@@ -228,4 +228,9 @@
     return [self.textView path];
 }
 
+- (NSInteger)tabWidth
+{
+    return [self.textView tabWidth];
+}
+
 @end

@@ -40,5 +40,6 @@
 - (void)goToLine:(NSInteger)line column:(NSInteger)column;
 - (NSString *)filename;
 - (NSString *)path;
+- (NSInteger)tabWidth;
 
 @end
