@@ -73,6 +73,11 @@
     return _bridge;
 }
 
+- (void)bridge:(void(^)())block;
+{
+    dispatch_async(self.bridgeQueue, block);
+}
+
 - (void)registerMenuItems:(id)menu
 {
     for (MARMenuItem *menuItem in [[menu class] items]) {
@@ -151,11 +156,13 @@
 {
     NSRange range = [self.codaManager lineRange];
     [self.codaManager beginUndoGrouping];
+
     NSString *string = [self.codaManager contentsOfRange:range];
     NSRange duplicateRange = NSMakeRange(range.location+range.length, 0);
     [self.codaManager replaceCharactersInRange:duplicateRange withString:string];
     NSRange selectRange = NSMakeRange(duplicateRange.location + duplicateRange.length + string.length - 1, 0);
     [self.codaManager setSelectedRange:selectRange];
+
     [self.codaManager endUndoGrouping];
 }
 
@@ -178,7 +185,7 @@
 - (void)openInNewWindow
 {
     NSString *path = [self.codaManager path];
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems] objectWithName:@"New Window"] clickAt:nil];
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Editor"] clickAt:nil];
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Hide Sidebar"] clickAt:nil];
@@ -195,13 +202,13 @@
                 }
             });
         }
-    });
+    }];
 }
 
 - (void)moveToNewWindow
 {
     NSString *path = [self.codaManager path];
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         NSArray *menuItems = [[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems];
 
         if (menuItems) {
@@ -219,12 +226,12 @@
                 }
             });
         }
-    });
+    }];
 }
 
 - (void)splitViewHorizontally
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         NSArray *menuItems = [[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems];
         if (menuItems) {
             SystemEventsMenuItem *find = [[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Find"];
@@ -232,13 +239,13 @@
             [[menuItems objectAtIndex:22] clickAt:nil];
             [[[[[find menus] lastObject] menuItems] objectWithName:@"Jump to Selection"] clickAt:nil];
         }
-    });
+    }];
 }
 
 
 - (void)splitViewVertically
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         NSArray *menuItems = [[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems];
         if (menuItems) {
             SystemEventsMenuItem *find = [[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Find"];
@@ -246,7 +253,7 @@
             [[menuItems objectAtIndex:23] clickAt:nil];
             [[[[[find menus] lastObject] menuItems] objectWithName:@"Jump to Selection"] clickAt:nil];
         }
-    });
+    }];
 }
 
 - (void)addNewlineAtEOF
@@ -337,14 +344,14 @@
             NSRange currentRange = [self.codaManager selectedRange];
             [self.codaManager setSelectedRange:NSMakeRange((currentRange.location-1), 0)];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.0005f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                dispatch_async(self.bridgeQueue,^{
+                [self bridge:^{
                 [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Select All Within Brackets"] clickAt:nil];
-            });
+                }];
             });
         } else {
-            dispatch_async(self.bridgeQueue,^{
+            [self bridge:^{
                 [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Select All Within Brackets"] clickAt:nil];
-            });
+            }];
         }
     }
 }
@@ -356,49 +363,49 @@
             NSRange currentRange = [self.codaManager selectedRange];
             [self.codaManager setSelectedRange:NSMakeRange((currentRange.location+currentRange.length), 0)];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.0005f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-                dispatch_async(self.bridgeQueue,^{
-                [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Select All Within Brackets"] clickAt:nil];
-            });
+                [self bridge:^{
+                    [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Select All Within Brackets"] clickAt:nil];
+                }];
             });
         } else {
-            dispatch_async(self.bridgeQueue,^{
+            [self bridge:^{
                 [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Select All Within Brackets"] clickAt:nil];
-            });
+            }];
         }
     }
 }
 
 - (void)shiftLeft
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Text"] menuItems] objectWithName:@"Shift Left"] clickAt:nil];
-    });
+    }];
 }
 
 - (void)shiftRight
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Text"] menuItems] objectWithName:@"Shift Right"] clickAt:nil];
-    });
+    }];
 }
 
 - (void)clearChangeMarks
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Clear Change Marks"] clickAt:nil];
-    });
+    }];
 }
 
 - (void)triggerUndo
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         [[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"Edit"] menuItems] objectWithName:@"Undo"] clickAt:nil];
-    });
+    }];
 }
 
 - (void)enableShowChangeMarks
 {
-    dispatch_async(self.bridgeQueue,^{
+    [self bridge:^{
         SystemEventsProcess *coda = [[[SBApplication applicationWithBundleIdentifier:@"com.apple.systemevents"] applicationProcesses] objectWithName:@"Coda 2"];
         SystemEventsUIElement *menuItem = [[[[[[coda menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Show Change Marks"];
         SystemEventsAttribute *attribute = [[menuItem attributes] objectWithName:@"AXMenuItemMarkChar"];
@@ -406,7 +413,7 @@
         if (![[[attribute properties] objectForKey:@"value"] isEqualTo:@"✓"]) {
             [menuItem clickAt:nil];
         }
-    });
+    }];
 }
 
 - (void)highlightSelection
