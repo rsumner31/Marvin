@@ -168,8 +168,7 @@
 
 - (void)joinLine
 {
-    NSRange range = [self.codaManager joinRange];
-    [self.codaManager replaceCharactersInRange:range withString:@""];
+    [self.codaManager replaceCharactersInRange:[self.codaManager joinRange] withString:@""];
 }
 
 - (void)uppercase
