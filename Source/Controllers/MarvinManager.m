@@ -298,7 +298,10 @@
             range.length -= 1;
             [self.codaManager replaceCharactersInRange:range withString:@""];
         }
-        [self.codaManager save];
+
+        [self bridge:^{
+        	[[[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"File"] menuItems] objectWithName:@"Save"] clickAt:nil];
+        }];
     });
 }
 
