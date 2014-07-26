@@ -104,7 +104,7 @@
 
 - (void)selectWordAbove
 {
-    NSRange preRange = [self.codaManager selectedRange];
+    NSUInteger initialLineNumber = [self.codaManager currentLineNumber];
 
     if (!self.codaManager.selectedRange.length) {
         [self selectWord];
@@ -115,13 +115,14 @@
         CFRelease(event);
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSUInteger lineNumber = [self.codaManager currentLineNumber];
-            [self selectWord];
+            NSUInteger currentLineNumber = [self.codaManager currentLineNumber];
+            NSRange currentRange = self.codaManager.selectedRange;
+            unichar currentCharacter = [[self.codaManager contents] characterAtIndex:currentRange.location];
+            NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_"];
 
-            NSRange postRange = [self.codaManager selectedRange];
-            if ((preRange.location == postRange.location
-            &&  preRange.length == postRange.length)
-            &&  lineNumber != [self.codaManager currentLineNumber]) {
+            if ([validSet characterIsMember:currentCharacter]) {
+                [self selectWord];
+            } else if (currentLineNumber <= initialLineNumber) {
                 [self selectPreviousWord];
             }
         });
