@@ -109,10 +109,15 @@
 
 - (void)selectWordAbove
 {
-    NSUInteger initialLineNumber = [self.codaManager currentLineNumber];
+    NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_"];
+    NSRange currentRange = [self.codaManager selectedRange];
+    unichar characterAtCursorStart = [[self.codaManager contents] characterAtIndex:currentRange.location];
+    unichar characterAtCursorEnd = [[self.codaManager contents] characterAtIndex:currentRange.location-1];
 
-    if (!self.codaManager.selectedRange.length) {
+    if (![self.codaManager selectedRange].length && [validSet characterIsMember:characterAtCursorStart]) {
         [self selectWord];
+    } else if (![self.codaManager selectedRange].length && [validSet characterIsMember:characterAtCursorEnd]) {
+        [self selectPreviousWord];
     } else {
         CGEventRef event = CGEventCreateKeyboardEvent(NULL, 126, true);
         CGEventSetFlags(event, 0);
@@ -120,14 +125,14 @@
         CFRelease(event);
 
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            NSUInteger currentLineNumber = [self.codaManager currentLineNumber];
-            NSRange currentRange = self.codaManager.selectedRange;
-            unichar currentCharacter = [[self.codaManager contents] characterAtIndex:currentRange.location];
-            NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_"];
 
-            if ([validSet characterIsMember:currentCharacter]) {
+            NSRange currentRange = [self.codaManager selectedRange];
+            unichar characterAtCursorStart = [[self.codaManager contents] characterAtIndex:currentRange.location];
+            unichar characterAtCursorEnd = [[self.codaManager contents] characterAtIndex:currentRange.location-1];
+
+            if ([validSet characterIsMember:characterAtCursorStart]) {
                 [self selectWord];
-            } else if (currentLineNumber <= initialLineNumber) {
+            } else {
                 [self selectPreviousWord];
             }
         });
