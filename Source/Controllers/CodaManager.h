@@ -41,5 +41,6 @@
 - (NSString *)filename;
 - (NSString *)path;
 - (NSInteger)tabWidth;
+- (NSRange)selectScope:(NSString *)delimiter;
 
 @end

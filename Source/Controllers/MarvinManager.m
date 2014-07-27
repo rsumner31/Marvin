@@ -128,7 +128,6 @@
 
             NSRange currentRange = [self.codaManager selectedRange];
             unichar characterAtCursorStart = [[self.codaManager contents] characterAtIndex:currentRange.location];
-            unichar characterAtCursorEnd = [[self.codaManager contents] characterAtIndex:currentRange.location-1];
 
             if ([validSet characterIsMember:characterAtCursorStart]) {
                 [self selectWord];
@@ -474,6 +473,21 @@
         [self.codaManager setSelectedRange:currentRange];
     });
 
+}
+
+- (void)wrapInBrackets
+{
+    NSRange bracketRange = [self.codaManager selectScope:@"[]"];
+    BOOL aborted = NSEqualRanges(bracketRange, self.codaManager.selectedRange);
+    [self.codaManager beginUndoGrouping];
+    [self.codaManager setSelectedRange:bracketRange];
+    NSString *target = [self.codaManager contentsOfRange:bracketRange];
+    NSString *result = [NSString stringWithFormat:@"[%@%@]", target, (aborted) ? @"" : @" " ];
+    [self.codaManager replaceCharactersInRange:bracketRange withString:result];
+    bracketRange.location += (bracketRange.length) + ((aborted) ? 1 : 2);
+    bracketRange.length = 0;
+    [self.codaManager setSelectedRange:bracketRange];
+    [self.codaManager endUndoGrouping];
 }
 
 @end

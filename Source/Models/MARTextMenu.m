@@ -53,6 +53,14 @@
                                                             [manager uppercase];
                                                         }];
     [items addObject:lowercase];
+    
+    MARMenuItem *wrapInBrackets = [[MARMenuItem alloc] initWithTitle:@"Wrap in Brackets"
+                                                        submenu:[self.class menuTitle]
+                                                  keyEquivalent:@""
+                                                        command:^(MarvinManager *manager){
+                                                            [manager wrapInBrackets];
+                                                        }];
+    [items addObject:wrapInBrackets];
 
     return items;
 }

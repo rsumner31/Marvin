@@ -35,5 +35,6 @@
 - (void)selectAllWithinBracketsBackward;
 - (void)selectAllWithinBracketsForward;
 - (void)highlightSelection;
+- (void)wrapInBrackets;
 
 @end
