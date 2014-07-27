@@ -243,45 +243,44 @@
     NSRange currentRange = [self.textView selectedRange];
 
     NSUInteger length = currentRange.location;
-    
-    BOOL aborted = NO;
 
     NSUInteger scanLocation = currentRange.location;
     NSScanner *scanner = [NSScanner scannerWithString:self.textView.string];
     [scanner setScanLocation:scanLocation];
     unichar character = [[self contents] characterAtIndex:[scanner scanLocation]];
     NSUInteger location = currentRange.location;
-    
+
     if ([endDelimiter characterIsMember:[[self contents] characterAtIndex:location-1]]) {
         --location;
         character = [[self contents] characterAtIndex:location];
         [scanner setScanLocation:location];
     }
-    
+
     if ([endDelimiter characterIsMember:character]) {
         [scanner setScanLocation:[scanner scanLocation]];
         --location;
     }
-    
+
     character = [[self contents] characterAtIndex:location];
     int matches = 1;
-    
+
     while (location > 0) {
         character = [[self contents] characterAtIndex:location];
-        if ([abortSet characterIsMember:character]) break;
+        if ([abortSet characterIsMember:character]) {
+            return self.textView.selectedRange;
+        }
         if ([startDelimiter characterIsMember:character]) matches -= 1;
         if (matches == 0) break;
         if ([endDelimiter characterIsMember:character])   matches += 1;
-        
+
         --location;
     }
-    
+
     while (!scanner.isAtEnd) {
         character = [[self contents] characterAtIndex:[scanner scanLocation]];
-        
+
         if ([scanner scanCharactersFromSet:abortSet intoString:nil]) {
-            aborted = YES;
-            break;
+            return self.textView.selectedRange;
         }
 
         if ([endDelimiter characterIsMember:character]) {
@@ -290,10 +289,6 @@
         }
 
         [scanner setScanLocation:[scanner scanLocation] + 1];
-    }
-
-    if (aborted) {
-        return self.textView.selectedRange;
     }
 
     return NSMakeRange(location, (length-location)+1);
