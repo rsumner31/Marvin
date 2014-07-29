@@ -443,10 +443,10 @@
 {
     NSString *document = [self.codaManager contents];
     NSString *currentSelection = [self.codaManager selectedText];
-
     NSRange currentRange = [self.codaManager selectedRange];
     NSInteger *currentLine;
     NSInteger *currentColumn;
+
     [self.codaManager getLine:&currentLine column:&currentColumn];
 
     if (![currentSelection length]) return;
@@ -484,16 +484,18 @@
 
 - (void)wrapInBrackets
 {
-    NSRange bracketRange = [self.codaManager selectScope:@"[]"];
-    BOOL aborted = NSEqualRanges(bracketRange, self.codaManager.selectedRange);
+    NSRange range = [self.codaManager selectScope:@"[]"];
+    BOOL aborted = NSEqualRanges(range, self.codaManager.selectedRange);
     [self.codaManager beginUndoGrouping];
-    [self.codaManager setSelectedRange:bracketRange];
-    NSString *target = [self.codaManager contentsOfRange:bracketRange];
+    [self.codaManager setSelectedRange:range];
+
+    NSString *target = [self.codaManager contentsOfRange:range];
     NSString *result = [NSString stringWithFormat:@"[%@%@]", target, (aborted) ? @"" : @" " ];
-    [self.codaManager replaceCharactersInRange:bracketRange withString:result];
-    bracketRange.location += (bracketRange.length) + ((aborted) ? 1 : 2);
-    bracketRange.length = 0;
-    [self.codaManager setSelectedRange:bracketRange];
+
+    [self.codaManager replaceCharactersInRange:range withString:result];
+    range.location += (range.length) + ((aborted) ? 1 : 2);
+    range.length = 0;
+    [self.codaManager setSelectedRange:range];
     [self.codaManager endUndoGrouping];
 }
 
