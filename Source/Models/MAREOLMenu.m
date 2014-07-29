@@ -14,29 +14,35 @@
 {
     NSMutableArray *items = [NSMutableArray array];
 
-    MARMenuItem *moveToEOLandInsertTerminator = [[MARMenuItem alloc] initWithTitle:@"Move To EOL and Insert Terminator"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Move To EOL and Insert Terminator"
                                                               submenu:[self.class menuTitle]
                                                         keyEquivalent:@"~@↩"
                                                               command:^(MarvinManager *manager){
                                                                   [manager moveToEOLAndInsertTerminator];
                                                               }];
-    [items addObject:moveToEOLandInsertTerminator];
+        menuItem;
+    })];
 
-    MARMenuItem *moveToEOLAndInsertTerminatorPlusLF = [[MARMenuItem alloc] initWithTitle:@"Move To EOL and Insert Terminator + LF"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Move To EOL and Insert Terminator + LF"
                                                               submenu:[self.class menuTitle]
                                                         keyEquivalent:@"$@↩"
                                                               command:^(MarvinManager *manager){
                                                                   [manager moveToEOLAndInsertTerminatorPlusLF];
                                                               }];
-    [items addObject:moveToEOLAndInsertTerminatorPlusLF];
+        menuItem;
+    })];
 
-    MARMenuItem *moveToEOLAndInsertLF = [[MARMenuItem alloc] initWithTitle:@"Move To EOL and Insert LF"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Move To EOL and Insert LF"
                                                               submenu:[self.class menuTitle]
                                                         keyEquivalent:@"@↩"
                                                               command:^(MarvinManager *manager){
                                                                   [manager moveToEOLAndInsertLF];
                                                               }];
-    [items addObject:moveToEOLAndInsertLF];
+        menuItem;
+    })];
 
     return [items copy];
 }

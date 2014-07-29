@@ -14,53 +14,65 @@
 {
     NSMutableArray *items = [NSMutableArray array];
 
-    MARMenuItem *deleteLine = [[MARMenuItem alloc] initWithTitle:@"Delete Line"
+    [items addObject:({
+        MARMenuItem *menuItem= [[MARMenuItem alloc] initWithTitle:@"Delete Line"
                                                          submenu:[self.class menuTitle]
                                                    keyEquivalent:@""
                                                          command:^(MarvinManager *manager){
                                                              [manager deleteLine];
                                                          }];
-    [items addObject:deleteLine];
+         menuItem;
+    })];
 
-    MARMenuItem *duplicateLine = [[MARMenuItem alloc] initWithTitle:@"Duplicate Line"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Duplicate Line"
                                                          submenu:[self.class menuTitle]
                                                    keyEquivalent:@""
                                                          command:^(MarvinManager *manager){
                                                              [manager duplicateLine];
                                                          }];
-    [items addObject:duplicateLine];
+        menuItem;
+    })];
 
-    MARMenuItem *joinLine = [[MARMenuItem alloc] initWithTitle:@"Join Line"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Join Line"
                                                          submenu:[self.class menuTitle]
                                                    keyEquivalent:@""
                                                          command:^(MarvinManager *manager){
                                                              [manager joinLine];
                                                          }];
-    [items addObject:joinLine];
+        menuItem;
+    })];
 
-    MARMenuItem *uppercase = [[MARMenuItem alloc] initWithTitle:@"Uppercase"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Uppercase"
                                                        submenu:[self.class menuTitle]
                                                  keyEquivalent:@""
                                                        command:^(MarvinManager *manager){
                                                            [manager uppercase];
                                                        }];
-    [items addObject:uppercase];
+        menuItem;
+    })];
 
-    MARMenuItem *lowercase = [[MARMenuItem alloc] initWithTitle:@"Lowercase"
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Lowercase"
                                                         submenu:[self.class menuTitle]
                                                   keyEquivalent:@""
                                                         command:^(MarvinManager *manager){
-                                                            [manager uppercase];
+                                                            [manager lowercase];
                                                         }];
-    [items addObject:lowercase];
-    
-    MARMenuItem *wrapInBrackets = [[MARMenuItem alloc] initWithTitle:@"Wrap in Brackets"
+        menuItem;
+    })];
+
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Wrap in Brackets"
                                                         submenu:[self.class menuTitle]
                                                   keyEquivalent:@""
                                                         command:^(MarvinManager *manager){
                                                             [manager wrapInBrackets];
                                                         }];
-    [items addObject:wrapInBrackets];
+        menuItem;
+    })];
 
     return items;
 }

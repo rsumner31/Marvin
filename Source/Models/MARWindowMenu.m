@@ -13,42 +13,49 @@
 + (NSArray *)items
 {
     NSMutableArray *items = [NSMutableArray array];
-    
-    MARMenuItem *newWindow = [[MARMenuItem alloc] initWithTitle:@"Open in New Window"
+
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Open in New Window"
                                                          submenu:[self.class menuTitle]
                                                    keyEquivalent:@"@N"
                                                          command:^(MarvinManager *manager){
                                                              [manager openInNewWindow];
                                                          }];
-    [items addObject:newWindow];
-    
-    MARMenuItem *moveToNewWindow = [[MARMenuItem alloc] initWithTitle:@"Move to New Window"
+        menuItem;
+    })];
+
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Move to New Window"
                                                          submenu:[self.class menuTitle]
                                                    keyEquivalent:@"~@N"
                                                          command:^(MarvinManager *manager){
                                                              [manager moveToNewWindow];
                                                          }];
-    [items addObject:moveToNewWindow];
-    
-    
-    MARMenuItem *splitViewVertically = [[MARMenuItem alloc] initWithTitle:@"Split Vertically"
+        menuItem;
+    })];
+
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Split Vertically"
                                                                     submenu:[self.class menuTitle]
                                                               keyEquivalent:@"^v"
                                                                     command:^(MarvinManager *manager){
                                                                         [manager splitViewVertically];
                                                                     }];
-    [items addObject:splitViewVertically];
-    
-    MARMenuItem *splitViewHorizontally = [[MARMenuItem alloc] initWithTitle:@"Split Horizontally"
+        menuItem;
+    })];
+
+    [items addObject:({
+        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Split Horizontally"
                                                         submenu:[self.class menuTitle]
                                                   keyEquivalent:@"@S"
                                                         command:^(MarvinManager *manager){
                                                             [manager splitViewHorizontally];
                                                         }];
-    [items addObject:splitViewHorizontally];
-    
-    
-    
+        menuItem;
+    })];
+
+
+
     return [items copy];
 }
 
