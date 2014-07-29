@@ -22,21 +22,18 @@
 - (void)setSelectedRange:(NSRange)range;
 - (NSRange)lineContentsRange;
 - (NSRange)lineRange;
-
 - (void)beginUndoGrouping;
 - (void)endUndoGrouping;
-
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (NSString *)contentsOfRange:(NSRange)range;
-- (NSRange)joinRange;;
-- (void)uppercase;
-- (void)lowercase;
-
+- (NSRange)joinRange;
 - (NSString*)currentLine;
 - (void)insertText:(NSString *)string;
 - (void)save;
 - (NSString *)selectedText;
 - (void)getLine:(NSInteger*)line column:(NSInteger*)column;
+- (BOOL)hasSelection;
+- (BOOL)emptySelection;
 - (void)goToLine:(NSInteger)line column:(NSInteger)column;
 - (NSString *)filename;
 - (NSString *)path;

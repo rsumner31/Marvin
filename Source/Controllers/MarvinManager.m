@@ -160,13 +160,11 @@
 {
     NSRange range = [self.codaManager lineRange];
     [self.codaManager beginUndoGrouping];
-
     NSString *string = [self.codaManager contentsOfRange:range];
     NSRange duplicateRange = NSMakeRange(range.location+range.length, 0);
     [self.codaManager replaceCharactersInRange:duplicateRange withString:string];
     NSRange selectRange = NSMakeRange(duplicateRange.location + duplicateRange.length + string.length - 1, 0);
     [self.codaManager setSelectedRange:selectRange];
-
     [self.codaManager endUndoGrouping];
 }
 
@@ -177,12 +175,22 @@
 
 - (void)uppercase
 {
-	[self.codaManager uppercase];
+	[self.codaManager beginUndoGrouping];
+	NSRange selectedRange = [self.codaManager selectedRange];
+	NSString *uppercaseString = [[self.codaManager selectedText] uppercaseString];
+	[self.codaManager replaceCharactersInRange:selectedRange withString:uppercaseString];
+	[self.codaManager setSelectedRange:selectedRange];
+	[self.codaManager endUndoGrouping];
 }
 
 - (void)lowercase
 {
-    [self.codaManager lowercase];
+	[self.codaManager beginUndoGrouping];
+	NSRange selectedRange = [self.codaManager selectedRange];
+	NSString *lowercaseString = [[self.codaManager selectedText] lowercaseString];
+	[self.codaManager replaceCharactersInRange:selectedRange withString:lowercaseString];
+	[self.codaManager setSelectedRange:selectedRange];
+	[self.codaManager endUndoGrouping];
 }
 
 - (void)openInNewWindow
@@ -375,7 +383,7 @@
 - (void)selectAllWithinBracketsForward
 {
     if (self.codaManager) {
-        if ([[self.codaManager selectedText] length] > 0) {
+        if ([self.codaManager hasSelection]) {
             NSRange currentRange = [self.codaManager selectedRange];
             [self.codaManager setSelectedRange:NSMakeRange((currentRange.location+currentRange.length), 0)];
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.0005f * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
@@ -422,8 +430,7 @@
 - (void)enableShowChangeMarks
 {
     [self bridge:^{
-        SystemEventsProcess *coda = [[[SBApplication applicationWithBundleIdentifier:@"com.apple.systemevents"] applicationProcesses] objectWithName:@"Coda 2"];
-        SystemEventsUIElement *menuItem = [[[[[[coda menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Show Change Marks"];
+        SystemEventsUIElement *menuItem = [[[[[[self.bridge menuBars] lastObject] menus] objectWithName:@"View"] menuItems] objectWithName:@"Show Change Marks"];
         SystemEventsAttribute *attribute = [[menuItem attributes] objectWithName:@"AXMenuItemMarkChar"];
 
         if (![[[attribute properties] objectForKey:@"value"] isEqualTo:@"✓"]) {

@@ -30,7 +30,7 @@
 
 - (NSUInteger)documentLength
 {
-    return [[self.textView string] length];
+    return [[self contents] length];
 }
 
 - (NSUInteger)currentLineNumber
@@ -47,21 +47,20 @@
 {
     NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_"];
     NSCharacterSet *spaceSet = [NSCharacterSet characterSetWithCharactersInString:@"#-<>/(){}[],;:. \n`*\"'"];
-    NSRange selectedRange = self.textView.selectedRange;
+    NSRange selectedRange = [self selectedRange];
 
     char character;
-    if (selectedRange.length > 0) {
-        character = [self.textView.string characterAtIndex:selectedRange.location+selectedRange.length];
+    if ([self hasSelection]) {
+        character = [[self contents] characterAtIndex:selectedRange.location+selectedRange.length];
     } else {
-        character = [self.textView.string characterAtIndex:selectedRange.location];
+        character = [[self contents] characterAtIndex:selectedRange.location];
     }
 
     if (![validSet characterIsMember:character]) {
         selectedRange = (NSRange) { .location = selectedRange.location + selectedRange.length };
     }
 
-
-    NSScanner *scanner = [NSScanner scannerWithString:self.textView.string];
+    NSScanner *scanner = [NSScanner scannerWithString:[self contents]];
     [scanner setScanLocation:selectedRange.location];
 
     NSUInteger length = selectedRange.location;
@@ -74,18 +73,18 @@
         [scanner setScanLocation:[scanner scanLocation] + 1];
     }
 
-    NSUInteger location = ([self.textView.string rangeOfCharacterFromSet:spaceSet options:NSBackwardsSearch range:NSMakeRange(0,length)].location +1);
+    NSUInteger location = ([[self contents] rangeOfCharacterFromSet:spaceSet options:NSBackwardsSearch range:NSMakeRange(0,length)].location +1);
 
     return NSMakeRange(location,length-location);
 }
 
 - (NSRange)previousWordRange
 {
-    NSRange selectedRange = self.textView.selectedRange;
+    NSRange selectedRange = [self selectedRange];
 
     NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_"];
 
-    NSUInteger location = ([self.textView.string rangeOfCharacterFromSet:validSet options:NSBackwardsSearch range:NSMakeRange(0,selectedRange.location)].location);
+    NSUInteger location = ([[self contents] rangeOfCharacterFromSet:validSet options:NSBackwardsSearch range:NSMakeRange(0,selectedRange.location)].location);
 
     return NSMakeRange(location,0);
 }
@@ -97,33 +96,30 @@
 
 - (NSRange)lineContentsRange
 {
-    NSRange range;
-    NSRange selectedRange = self.textView.selectedRange;
+    NSRange selectedRange = [self selectedRange];
     NSCharacterSet *newlineSet = [NSCharacterSet characterSetWithCharactersInString:@"\n"];
-    NSUInteger startOfLine = ([self.textView.string rangeOfCharacterFromSet:newlineSet options:NSBackwardsSearch range:NSMakeRange(0,selectedRange.location)].location);
+    NSUInteger startOfLine = ([[self contents] rangeOfCharacterFromSet:newlineSet options:NSBackwardsSearch range:NSMakeRange(0,selectedRange.location)].location);
 
     NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_!\"#€%&/()=?`<>@£$∞§|[]≈±´¡”¥¢‰¶\{}≠¿`~^*+-;"];
 
-    NSUInteger location = ([self.textView.string rangeOfCharacterFromSet:validSet options:NSCaseInsensitiveSearch range:NSMakeRange(startOfLine,self.textView.string.length-startOfLine)].location);
+    NSUInteger location = ([[self contents] rangeOfCharacterFromSet:validSet options:NSCaseInsensitiveSearch range:NSMakeRange(startOfLine,[self documentLength]-startOfLine)].location);
 
-    NSUInteger length = ([self.textView.string rangeOfCharacterFromSet:newlineSet options:NSCaseInsensitiveSearch range:NSMakeRange(selectedRange.location+selectedRange.length,self.textView.string.length-(selectedRange.location+selectedRange.length))].location);
+    NSUInteger length = ([[self contents] rangeOfCharacterFromSet:newlineSet options:NSCaseInsensitiveSearch range:NSMakeRange(selectedRange.location+selectedRange.length,[self contents].length-(selectedRange.location+selectedRange.length))].location);
 
     if (length-location < [self documentLength]) {
-        range = NSMakeRange(location, length-location);
+        return NSMakeRange(location, length-location);
     } else {
-        range = NSMakeRange(selectedRange.location, 0);
+        return NSMakeRange(selectedRange.location, 0);
     }
-
-    return range;
 }
 
 - (NSRange)lineRange
 {
-    NSRange selectedRange = self.textView.selectedRange;
+    NSRange selectedRange = [self selectedRange];
     NSCharacterSet *newlineSet = [NSCharacterSet characterSetWithCharactersInString:@"\n"];
-    NSUInteger location = ([self.textView.string rangeOfCharacterFromSet:newlineSet options:NSBackwardsSearch range:NSMakeRange(0,selectedRange.location)].location);
+    NSUInteger location = ([[self contents] rangeOfCharacterFromSet:newlineSet options:NSBackwardsSearch range:NSMakeRange(0,selectedRange.location)].location);
 
-    NSUInteger length = ([self.textView.string rangeOfCharacterFromSet:newlineSet options:NSCaseInsensitiveSearch range:NSMakeRange(selectedRange.location+selectedRange.length,self.textView.string.length-(selectedRange.location+selectedRange.length))].location);
+    NSUInteger length = ([[self contents] rangeOfCharacterFromSet:newlineSet options:NSCaseInsensitiveSearch range:NSMakeRange(selectedRange.location+selectedRange.length,[self contents].length-(selectedRange.location+selectedRange.length))].location);
 
     return NSMakeRange(location+1, length-location);
 }
@@ -145,7 +141,7 @@
 
 - (NSString *)contentsOfRange:(NSRange)range
 {
-    return [self.textView.string substringWithRange:range];
+    return [[self contents] substringWithRange:range];
 }
 
 - (NSRange)joinRange
@@ -155,37 +151,9 @@
 
     NSCharacterSet *validSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789ABCDEFGHIJKOLMNOPQRSTUVWXYZÅÄÆÖØabcdefghijkolmnopqrstuvwxyzåäæöø_!\"#€%&/()=?`<>@£$∞§|[]≈±´¡”¥¢‰¶\{}≠¿`~^*+-;"];
 
-    NSUInteger length = ([self.textView.string rangeOfCharacterFromSet:validSet options:NSCaseInsensitiveSearch range:NSMakeRange(joinRange.location,self.textView.string.length-joinRange.location)].location);
+    NSUInteger length = ([[self contents] rangeOfCharacterFromSet:validSet options:NSCaseInsensitiveSearch range:NSMakeRange(joinRange.location,[self contents].length-joinRange.location)].location);
 
-    NSRange range = NSMakeRange(joinRange.location, length - joinRange.location);
-
-    return range;
-}
-
-- (void)uppercase
-{
-
-	if (self.textView) {
-		[self.textView beginUndoGrouping];
-		NSRange selectedRange = [self.textView selectedRange];
-		NSString *uppercaseString = [[self.textView selectedText] uppercaseString];
-		[self.textView replaceCharactersInRange:selectedRange withString:uppercaseString];
-		[self.textView setSelectedRange:selectedRange];
-		[self.textView endUndoGrouping];
-	}
-}
-
-- (void)lowercase
-{
-
-	if (self.textView) {
-		[self.textView beginUndoGrouping];
-		NSRange selectedRange = [self.textView selectedRange];
-		NSString *lowercaseString = [[self.textView selectedText] lowercaseString];
-		[self.textView replaceCharactersInRange:selectedRange withString:lowercaseString];
-		[self.textView setSelectedRange:selectedRange];
-		[self.textView endUndoGrouping];
-	}
+    return NSMakeRange(joinRange.location, length - joinRange.location);
 }
 
 - (NSString*)currentLine
@@ -206,6 +174,16 @@
 - (NSString *)selectedText
 {
     return [self.textView selectedText];
+}
+
+- (BOOL)hasSelection
+{
+    return (self.textView.selectedText.length) ? YES : NO;
+}
+
+- (BOOL)emptySelection
+{
+    return (self.textView.selectedText.length) ? NO : YES;
 }
 
 - (void)getLine:(NSInteger*)line column:(NSInteger*)column
@@ -235,18 +213,15 @@
 
 - (NSRange)selectScope:(NSString *)delimiter
 {
-    if (self.textView.selectedText.length) return self.textView.selectedRange;
+    if ([self hasSelection]) return [self selectedRange];
 
     NSCharacterSet *startDelimiter = [NSCharacterSet characterSetWithCharactersInString:[delimiter substringToIndex:1]];
     NSCharacterSet *endDelimiter = [NSCharacterSet characterSetWithCharactersInString:[delimiter substringFromIndex:1]];
     NSCharacterSet *abortSet = [NSCharacterSet characterSetWithCharactersInString:@";=/#,"];
-    NSRange currentRange = [self.textView selectedRange];
-
+    NSRange currentRange = [self selectedRange];
     NSUInteger length = currentRange.location;
-
-    NSUInteger scanLocation = currentRange.location;
-    NSScanner *scanner = [NSScanner scannerWithString:self.textView.string];
-    [scanner setScanLocation:scanLocation];
+    NSScanner *scanner = [NSScanner scannerWithString:[self contents]];
+    [scanner setScanLocation:length];
     unichar character = [[self contents] characterAtIndex:[scanner scanLocation]];
     NSUInteger location = currentRange.location;
 
@@ -266,9 +241,8 @@
 
     while (location > 0) {
         character = [[self contents] characterAtIndex:location];
-        if ([abortSet characterIsMember:character]) {
-            return self.textView.selectedRange;
-        }
+
+        if ([abortSet characterIsMember:character]) return [self selectedRange];
         if ([startDelimiter characterIsMember:character]) matches -= 1;
         if (matches == 0) break;
         if ([endDelimiter characterIsMember:character])   matches += 1;
@@ -279,17 +253,13 @@
     while (!scanner.isAtEnd) {
         character = [[self contents] characterAtIndex:[scanner scanLocation]];
 
-        if ([scanner scanCharactersFromSet:abortSet intoString:nil]) {
-            return self.textView.selectedRange;
-        }
-
-        if ([endDelimiter characterIsMember:character]) {
-            length = [scanner scanLocation];
-            break;
-        }
+        if ([scanner scanCharactersFromSet:abortSet intoString:nil])
+            return [self selectedRange];
+        if ([endDelimiter characterIsMember:character]) break;
 
         [scanner setScanLocation:[scanner scanLocation] + 1];
     }
+    length = [scanner scanLocation];
 
     return NSMakeRange(location, (length-location)+1);
 }
