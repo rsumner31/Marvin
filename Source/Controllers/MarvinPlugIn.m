@@ -36,7 +36,7 @@
     self = [super init];
     if (!self) return nil;
 
-    self.marvinManager =  [self.marvinManager initWithPlugInsController:inController];
+    self.marvinManager = [self.marvinManager initWithPlugInsController:inController];
 
     return self;
 }

@@ -13,13 +13,13 @@
 - (NSString *)reverse {
     NSMutableString *reversed = [NSMutableString string];
     NSInteger charIndex = [self length];
-    
+
     while (charIndex > 0) {
         charIndex--;
         NSRange subRange = NSMakeRange(charIndex, 1);
         [reversed appendString:[self substringWithRange:subRange]];
     }
-    
+
     return reversed;
 }
 

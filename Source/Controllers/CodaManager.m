@@ -153,6 +153,8 @@
 
     NSUInteger length = ([[self contents] rangeOfCharacterFromSet:validSet options:NSCaseInsensitiveSearch range:NSMakeRange(joinRange.location,[self contents].length-joinRange.location)].location);
 
+
+
     return NSMakeRange(joinRange.location, length - joinRange.location);
 }
 
@@ -213,6 +215,7 @@
 
 - (NSRange)selectScope:(NSString *)delimiter
 {
+
     if ([self hasSelection]) return [self selectedRange];
 
     NSCharacterSet *startDelimiter = [NSCharacterSet characterSetWithCharactersInString:[delimiter substringToIndex:1]];

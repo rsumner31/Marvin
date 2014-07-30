@@ -322,7 +322,8 @@
     [self removeTrailingWhitespace];
 }
 
-- (void)moveToEOLAndInsertLF {
+- (void)moveToEOLAndInsertLF
+{
     NSRange endOfLineRange = [self.codaManager lineContentsRange];
     NSRange lineRange = [self.codaManager lineRange];
     unsigned long endOfLine = (unsigned long)endOfLineRange.location+(unsigned long)endOfLineRange.length;

@@ -14,12 +14,12 @@
 {
     self = [super init];
     if (!self) return nil;
-    
+
     self.title = title;
     self.submenu = submenu;
     self.keyEquivalent = binding;
     self.command = command;
-    
+
     return self;
 }
 
