@@ -107,16 +107,6 @@
     })];
 
     [items addObject:({
-        MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Highlight Selection"
-                                                           submenu:[self.class menuTitle]
-                                                     keyEquivalent:@"@$e"
-                                                           command:^(MarvinManager *manager){
-                                                               [manager highlightSelection];
-                                                           }];
-        menuItem;
-    })];
-
-    [items addObject:({
         MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Select All Within Brackets - Forward"
                                                            submenu:[self.class menuTitle]
                                                      keyEquivalent:@""

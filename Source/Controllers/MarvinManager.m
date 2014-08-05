@@ -440,49 +440,6 @@
     }];
 }
 
-- (void)highlightSelection
-{
-    NSString *document = [self.codaManager contents];
-    NSString *currentSelection = [self.codaManager selectedText];
-    NSRange currentRange = [self.codaManager selectedRange];
-    NSInteger *currentLine;
-    NSInteger *currentColumn;
-
-    [self.codaManager getLine:&currentLine column:&currentColumn];
-
-    if (![currentSelection length]) return;
-
-    [self clearChangeMarks];
-
-    NSError *error = nil;
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:currentSelection options:NSRegularExpressionIgnoreMetacharacters error:&error];
-
-    NSMutableArray *ranges = [NSMutableArray array];
-
-    [regex enumerateMatchesInString:document options:NSMatchingReportProgress range:NSMakeRange(0,[document length]) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop) {
-        if (result) {
-            [ranges addObject:result];
-        }
-    }];
-
-    if (![ranges count]) return;
-
-    [self.codaManager beginUndoGrouping];
-    for (NSTextCheckingResult *textResult in ranges) {
-        [self.codaManager replaceCharactersInRange:textResult.range withString:currentSelection];
-    }
-
-    [self triggerUndo];
-    [self.codaManager endUndoGrouping];
-    [self enableShowChangeMarks];
-
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [self.codaManager goToLine:currentLine column:currentColumn];
-        [self.codaManager setSelectedRange:currentRange];
-    });
-
-}
-
 - (void)wrapInBrackets
 {
     NSRange range = [self.codaManager selectScope:@"[]"];
