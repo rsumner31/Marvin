@@ -16,6 +16,7 @@
 #import "MARWindowMenu.h"
 #import "MARTextMenu.h"
 #import "MAREOLMenu.h"
+#import "MARObjectiveCMenu.h"
 
 @interface MarvinManager ()
 @property (nonatomic, strong) CodaManager *codaManager;
@@ -36,6 +37,7 @@
     [self registerMenuItems:[MARSelectionMenu new]];
     [self registerMenuItems:[MARWindowMenu new]];
     [self registerMenuItems:[MAREOLMenu new]];
+    [self registerMenuItems:[MARObjectiveCMenu new]];
 
     return self;
 }
@@ -455,6 +457,27 @@
     range.length = 0;
     [self.codaManager setSelectedRange:range];
     [self.codaManager endUndoGrouping];
+}
+
+- (void)openCounterpart
+{
+    NSString *path = [self.codaManager path];
+	NSString *extension = ([[path pathExtension] isEqualToString:@"m"]) ? @"h" : @"m" ;
+    NSString *counterPath = [NSString stringWithFormat:@"%@.%@", [path stringByDeletingPathExtension], extension];
+
+    if ([[NSFileManager defaultManager] fileExistsAtPath:counterPath]) {
+        [self openFileAtPath:counterPath];
+    }
+
+}
+
+- (void)openFileAtPath:(NSString *)path
+{
+    if ([[NSFileManager defaultManager] fileExistsAtPath:@"/usr/local/bin/coda" isDirectory:NO]) {
+        [NSTask launchedTaskWithLaunchPath:@"/usr/local/bin/coda" arguments:@[@"-rp", path]];
+    } else {
+        [NSTask launchedTaskWithLaunchPath:@"/usr/bin/open" arguments:@[@"-a", @"Coda 2", path]];
+    }
 }
 
 @end
