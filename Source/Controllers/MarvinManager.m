@@ -162,13 +162,11 @@
 {
     NSRange range = [self.codaManager lineRange];
     [self.codaManager beginUndoGrouping];
-
     NSString *string = [self.codaManager contentsOfRange:range];
     NSRange duplicateRange = NSMakeRange(range.location+range.length, 0);
     [self.codaManager replaceCharactersInRange:duplicateRange withString:string];
     NSRange selectRange = NSMakeRange(duplicateRange.location + duplicateRange.length + string.length - 1, 0);
     [self.codaManager setSelectedRange:selectRange];
-
     [self.codaManager endUndoGrouping];
 }
 
