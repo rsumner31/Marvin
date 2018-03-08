@@ -6,9 +6,9 @@
 //
 //
 
-#import "MarvinPlugIn.h"
+#import "MarvinPlugInController.h"
 
-@implementation MarvinPlugIn
+@implementation MarvinPlugInController
 
 - (NSString *)name
 {

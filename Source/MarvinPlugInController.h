@@ -11,6 +11,6 @@
 
 @class CodaPlugInsController;
 
-@interface MarvinPlugIn : NSObject <CodaPlugIn>
+@interface MarvinPlugInController : NSObject <CodaPlugIn>
 
 @end
