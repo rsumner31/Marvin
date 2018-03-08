@@ -10,4 +10,9 @@
 
 @implementation MarvinPlugIn
 
+- (NSString *)name
+{
+    return @"Marvin";
+}
+
 @end

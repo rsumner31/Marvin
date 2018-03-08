@@ -7,7 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "CodaPlugInsController.h"
 
-@interface MarvinPlugIn : NSObject
+@class CodaPlugInsController;
+
+@interface MarvinPlugIn : NSObject <CodaPlugIn>
 
 @end
