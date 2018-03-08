@@ -119,7 +119,7 @@
     [items addObject:({
         MARMenuItem *menuItem = [[MARMenuItem alloc] initWithTitle:@"Select All Within Brackets - Backward"
                                                            submenu:[self.class menuTitle]
-                                                     keyEquivalent:@""
+                                                     keyEquivalent:@"@$e"
                                                            command:^(MarvinManager *manager){
                                                                [manager selectAllWithinBracketsBackward];
                                                            }];

@@ -267,4 +267,44 @@
     return NSMakeRange(location, (length-location)+1);
 }
 
+- (NSString*)currentLine
+{
+    return [self.textView currentLine];
+}
+
+- (void)insertText:(NSString *)string
+{
+    [self.textView insertText:string];
+}
+
+- (void)save
+{
+    [self.textView save];
+}
+
+- (NSString *)selectedText
+{
+    return [self.textView selectedText];
+}
+
+- (void)getLine:(NSInteger*)line column:(NSInteger*)column
+{
+    [self.textView getLine:line column:column];
+}
+
+- (void)goToLine:(NSInteger)line column:(NSInteger)column
+{
+    [self.textView goToLine:line column:column];
+}
+
+- (NSString *)filename
+{
+    return [self.textView filename];
+}
+
+- (NSString *)path
+{
+    return [self.textView path];
+}
+
 @end

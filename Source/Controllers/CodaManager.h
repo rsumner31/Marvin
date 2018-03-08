@@ -40,4 +40,13 @@
 - (NSInteger)tabWidth;
 - (NSRange)selectScope:(NSString *)delimiter;
 
+- (NSString*)currentLine;
+- (void)insertText:(NSString *)string;
+- (void)save;
+- (NSString *)selectedText;
+- (void)getLine:(NSInteger*)line column:(NSInteger*)column;
+- (void)goToLine:(NSInteger)line column:(NSInteger)column;
+- (NSString *)filename;
+- (NSString *)path;
+
 @end

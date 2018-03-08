@@ -196,6 +196,8 @@
 				BD2CA75E19766B9900C04143 /* MARTextMenu.m */,
 				BD4BA06019762D7200AF69B0 /* MARWindowMenu.h */,
 				BD4BA06119762D7200AF69B0 /* MARWindowMenu.m */,
+				BD23961519801DC700FBB9CF /* MAREOLMenu.h */,
+				BD23961619801DC700FBB9CF /* MAREOLMenu.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
